@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knollo – five-minute breathers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sun:#ffe55c; --sun2:#fff3a6; --leaf:#4fa83d; --leaf2:#b5e03a; --bark:#7a4a2b; --bark2:#4b2a17;
+  --cream:#fffaf0; --sky:#1668c5; --berry:#e0342b; --ink:#3a2314; --card:#fffdf6; --bg:var(--sun);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#2b3a1c;--sun2:#3d5a22;--cream:#1f2a14;--card:#2a3a1a;--ink:#fff3d6;--sky:#8cc4ff;--bark:#e0b080}
+}
+:root[data-theme="dark"]{--bg:#2b3a1c;--sun2:#3d5a22;--cream:#1f2a14;--card:#2a3a1a;--ink:#fff3d6;--sky:#8cc4ff;--bark:#e0b080}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;font-family:Fredoka,"Trebuchet MS",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:10px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-weight:700;font-size:1.6rem;color:var(--berry);text-decoration:none;letter-spacing:-.5px}
+nav a.pill{background:var(--sky);color:#fff;text-decoration:none;padding:8px 18px;border-radius:99px;font-weight:500;transition:transform .2s}
+nav a.pill:hover{transform:rotate(-3deg) scale(1.06)}
+/* hero */
+.hero{position:relative;text-align:center;padding:30px 0 0}
+.badge{position:absolute;right:2%;top:10px;background:var(--leaf);color:#fff;font-weight:500;padding:14px 26px 14px 14px;border-radius:0 100% 0 100%;transform:rotate(12deg);animation:sway 4s ease-in-out infinite;transform-origin:0 100%;font-size:.95rem;line-height:1.15}
+.frame{position:relative;margin:30px auto 0;max-width:760px;background:var(--cream);border:10px solid var(--bark);border-radius:50%/60% 60% 50% 50%;padding:56px 40px 70px;box-shadow:inset 0 0 0 4px var(--sun2)}
+.frame small{display:block;color:var(--sky);font-weight:500;font-size:1.05rem}
+h1{margin:6px 0 4px;font-size:clamp(3.2rem,13vw,7rem);line-height:1;color:var(--bark);font-weight:700;letter-spacing:-2px;text-shadow:0 5px 0 rgba(0,0,0,.1)}
+h1 span{display:inline-block;cursor:pointer;transition:transform .25s}
+h1 span:nth-child(odd){transform:rotate(-4deg)}
+h1 span:nth-child(even){transform:rotate(3deg) translateY(4px)}
+h1 span.hop{animation:hop .6s}
+.lede{max-width:34ch;margin:10px auto 0;font-size:1.15rem}
+.btn{display:inline-block;margin-top:22px;background:var(--berry);color:#fff;border:0;font:inherit;font-weight:700;padding:14px 30px;border-radius:99px;cursor:pointer;box-shadow:0 5px 0 #9d211b;transition:transform .15s,box-shadow .15s;text-decoration:none}
+.btn:hover{transform:translateY(-2px) rotate(-1.5deg)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #9d211b}
+/* knolls */
+.knolls{display:flex;justify-content:center;gap:clamp(6px,2vw,22px);margin-top:-46px;position:relative;z-index:2;padding:0 10px}
+.knoll{width:clamp(48px,11vw,96px);aspect-ratio:1/1.05;border:0;padding:0;background:none;cursor:pointer;position:relative;animation:bob 3.2s ease-in-out infinite;animation-delay:calc(var(--i)*.35s)}
+.knoll .cap{position:absolute;inset:0 0 28% 0;background:repeating-linear-gradient(100deg,rgba(255,255,255,.14) 0 6%,transparent 6% 18%),var(--c);border-radius:50% 50% 14% 14%/78% 78% 22% 22%;box-shadow:inset -6px -8px 0 rgba(0,0,0,.18),inset 6px 6px 0 rgba(255,255,255,.2)}
+.knoll .stem{position:absolute;left:30%;right:30%;bottom:0;height:42%;background:#ffc98a;border-radius:0 0 40% 40%;z-index:-1}
+.knoll.pop{animation:hop .6s}
+.tip{min-height:3.2em;text-align:center;font-weight:500;margin:18px auto 0;max-width:36ch;position:relative;z-index:2}
+/* hills */
+.land{position:relative;margin-top:-30px;height:240px}
+.land svg{position:absolute;inset:0;width:100%;height:100%}
+.cloud{position:absolute;background:#fff;border-radius:99px;height:30px;width:90px;opacity:.9;animation:drift linear infinite}
+.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud:before{width:42px;height:42px;left:12px;top:-20px}.cloud:after{width:32px;height:32px;left:44px;top:-14px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cloud{opacity:.25}}
+/* sections */
+section{padding:70px 0;background:linear-gradient(var(--leaf2),var(--leaf2))}
+section.light{background:var(--bg)}
+h2{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 10px;color:var(--bark2);letter-spacing:-1px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) section{background:#34521f}:root:not([data-theme="light"]) h2{color:var(--ink)}}
+.breather{display:grid;gap:32px;grid-template-columns:1fr 1fr;align-items:center}
+.orb-box{display:grid;place-items:center;aspect-ratio:1;max-width:340px;margin:auto;width:100%}
+.orb{width:50%;aspect-ratio:1;border-radius:50% 50% 14% 14%/78% 78% 22% 22%;background:repeating-linear-gradient(100deg,rgba(255,255,255,.14) 0 6%,transparent 6% 18%),var(--bark);display:grid;place-items:center;color:#fff;font-weight:700;text-align:center;border:0;cursor:pointer;font-family:inherit;font-size:1.1rem;box-shadow:inset -10px -12px 0 rgba(0,0,0,.2),0 0 0 14px rgba(255,255,255,.35);transition:transform 4s ease-in-out}
+.orb.in{transform:scale(1.5)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.chip{border:3px solid var(--bark);background:var(--card);color:var(--ink);font:inherit;font-weight:500;padding:6px 16px;border-radius:99px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--bark);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.card{background:var(--card);border-radius:28px 28px 28px 6px;padding:26px;border:4px solid var(--bark);transition:transform .25s}
+.card:nth-child(2){border-radius:28px 28px 6px 28px}
+.card:hover{transform:rotate(-1.8deg) translateY(-6px)}
+.card .ic{font-size:2.2rem;display:inline-block}
+.card:hover .ic{animation:hop .6s}
+.card h3{margin:8px 0 4px;font-size:1.35rem;color:var(--bark)}
+.card p{margin:0}
+.cta{text-align:center}
+.cta .frame{padding:46px 30px 54px;border-radius:50%/50%}
+footer{background:var(--bark2);color:#ffe9c7;text-align:center;padding:26px 20px;font-size:.95rem}
+/* mushroom cursor (mouse users only) */
+.mush-cur{position:fixed;left:0;top:0;width:36px;height:40px;pointer-events:none;z-index:9999;display:none;opacity:0;will-change:transform}
+.mush-cur svg{display:block;width:100%;height:100%;transition:transform .15s;transform-origin:50% 90%}
+.mush-cur.down svg{transform:scale(1.2,.8)}
+.mush-cur.hot svg{transform:scale(1.25) rotate(-8deg)}
+@media (hover:hover) and (pointer:fine){
+  html.mush,html.mush *{cursor:none!important}
+  html.mush .mush-cur{display:block}
+}
+/* motion */
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+@keyframes hop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-34px) scale(1.12,.9)}60%{transform:translateY(0) scale(.92,1.1)}100%{transform:none}}
+@keyframes sway{0%,100%{transform:rotate(8deg)}50%{transform:rotate(18deg)}}
+@keyframes drift{from{transform:translateX(-140px)}to{transform:translateX(110vw)}}
+.rise{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.rise.on{opacity:1;transform:none}
+@media (max-width:760px){
+  .breather,.grid{grid-template-columns:1fr}
+  .frame{padding:44px 22px 60px;border-width:8px}
+  .badge{position:static;display:inline-block;margin-top:6px}
+  .land{height:170px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <nav>
+    <a class="logo" href="#top" aria-label="Knollo home">knollo</a>
+    <a class="pill" href="#start">Get the app</a>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="badge" aria-hidden="true">pause.<br>breathe.<br>go on.</div>
+    <div class="frame">
+      <small>The five-minute breather app</small>
+      <h1 id="word" aria-label="knollo">knollo</h1>
+      <p class="lede">Short, guided pauses that fit between meetings, buses and big feelings.</p>
+      <a class="btn" href="#start">Start a breather</a>
+    </div>
+    <div class="knolls" id="knolls"></div>
+    <p class="tip" id="tip" aria-live="polite">Tap a knoll to hop it.</p>
+  </div>
+
+  <div class="land" aria-hidden="true">
+    <span class="cloud" style="top:20px;animation-duration:60s"></span>
+    <span class="cloud" style="top:70px;animation-duration:90s;animation-delay:-40s;transform:scale(.7)"></span>
+    <svg viewBox="0 0 1200 240" preserveAspectRatio="none">
+      <path d="M0 110 Q150 30 320 100 T640 90 T960 70 T1200 100 V240 H0Z" fill="#8fd14f"/>
+      <path d="M0 160 Q200 90 420 150 T800 140 T1200 150 V240 H0Z" fill="#4fa83d"/>
+      <path d="M0 215 Q300 170 600 205 T1200 195 V240 H0Z" fill="#b5e03a"/>
+      <path d="M600 240 Q560 200 620 175 T600 120" stroke="#c98a4b" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/>
+    </svg>
+  </div>
+
+  <section id="try" aria-labelledby="try-h">
+    <div class="wrap breather">
+      <div class="orb-box rise">
+        <button class="orb" id="orb" aria-live="polite">Tap to begin</button>
+      </div>
+      <div class="rise">
+        <h2 id="try-h">Try one right here.</h2>
+        <p>Pick what kind of pause you need, then follow the knoll as it grows and settles.</p>
+        <div class="chips" role="group" aria-label="Breather type">
+          <button class="chip" aria-pressed="true" data-in="4" data-out="4">Steady</button>
+          <button class="chip" aria-pressed="false" data-in="4" data-out="7">Wind down</button>
+          <button class="chip" aria-pressed="false" data-in="3" data-out="3">Quick reset</button>
+        </div>
+        <p id="rhythm">Breathe in for 4, out for 4.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="light" aria-labelledby="why-h">
+    <div class="wrap">
+      <h2 id="why-h">Small pauses, big meadow.</h2>
+      <div class="grid">
+        <article class="card rise"><span class="ic" aria-hidden="true">🌤️</span><h3>Five minutes or less</h3><p>Every breather has a start and a finish, so you never lose your afternoon.</p></article>
+        <article class="card rise"><span class="ic" aria-hidden="true">🍃</span><h3>Trail sounds</h3><p>Creeks, wind in leaves and far-off bells. Download once, use offline.</p></article>
+        <article class="card rise"><span class="ic" aria-hidden="true">🏡</span><h3>A village that grows</h3><p>Each breather adds a cottage, tree or path to your own hillside.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="start" aria-labelledby="go-h">
+    <div class="wrap">
+      <div class="frame rise">
+        <h2 id="go-h">Your first breather is free.</h2>
+        <p class="lede">Join the waitlist and we’ll send a link the day knollo opens.</p>
+        <button class="btn" id="join">Save my spot</button>
+        <p class="tip" id="joined" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>knollo is a fictional brand made for a design exercise.</footer>
+<div class="mush-cur" id="mush" aria-hidden="true">
+  <svg viewBox="0 0 40 44"><path d="M4 22C4 9 12 3 20 3s16 6 16 19c0 2-2 3-4 3H8c-2 0-4-1-4-3z" fill="#e0342b" stroke="#4b2a17" stroke-width="2.5" stroke-linejoin="round"/><circle cx="13" cy="13" r="3" fill="#fff"/><circle cx="25" cy="10" r="2.4" fill="#fff"/><circle cx="29" cy="18" r="2" fill="#fff"/><path d="M14 25h12v9c0 4-3 7-6 7s-6-3-6-7z" fill="#ffc98a" stroke="#4b2a17" stroke-width="2.5" stroke-linejoin="round"/><circle cx="17.5" cy="31" r="1.4" fill="#4b2a17"/><circle cx="22.5" cy="31" r="1.4" fill="#4b2a17"/><path d="M18.5 34q1.5 1.5 3 0" stroke="#4b2a17" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+</div>
+
+<script>
+(function(){
+  // Split the wordmark into hoppable letters
+  var word=document.getElementById('word');
+  var txt=word.textContent; word.textContent='';
+  txt.split('').forEach(function(ch){
+    var s=document.createElement('span'); s.textContent=ch; s.setAttribute('aria-hidden','true');
+    s.addEventListener('mouseenter',function(){s.classList.remove('hop');void s.offsetWidth;s.classList.add('hop')});
+    s.addEventListener('click',function(){s.classList.remove('hop');void s.offsetWidth;s.classList.add('hop')});
+    word.appendChild(s);
+  });
+
+  // Knolls
+  var colors=['#7a4a2b','#4fa83d','#1668c5','#e0342b','#f2b705','#7a4a2b'];
+  var tips=['Shoulders down. Nice.','One slow breath in. Good.','Unclench your jaw.','Look at something far away.','Drink some water, then come back.','You’re doing fine. Really.'];
+  var box=document.getElementById('knolls'), tip=document.getElementById('tip');
+  colors.forEach(function(c,i){
+    var b=document.createElement('button');
+    b.className='knoll'; b.style.setProperty('--i',i); b.style.setProperty('--c',c);
+    b.setAttribute('aria-label','Knoll '+(i+1));
+    b.innerHTML='<span class="stem"></span><span class="cap"></span>';
+    b.addEventListener('click',function(){
+      b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');
+      tip.textContent=tips[i];
+    });
+    box.appendChild(b);
+  });
+
+  // Breather orb
+  var orb=document.getElementById('orb'), chips=document.querySelectorAll('.chip'), rhythm=document.getElementById('rhythm');
+  var cfg={i:4,o:4}, running=false, timer=null;
+  chips.forEach(function(ch){
+    ch.addEventListener('click',function(){
+      chips.forEach(function(x){x.setAttribute('aria-pressed','false')});
+      ch.setAttribute('aria-pressed','true');
+      cfg.i=+ch.dataset.in; cfg.o=+ch.dataset.out;
+      rhythm.textContent='Breathe in for '+cfg.i+', out for '+cfg.o+'.';
+      if(running) stop();
+    });
+  });
+  function stop(){running=false;clearTimeout(timer);orb.classList.remove('in');orb.style.transitionDuration='';orb.textContent='Tap to begin'}
+  function cycle(){
+    if(!running) return;
+    orb.style.transitionDuration=cfg.i+'s'; orb.classList.add('in'); orb.textContent='In';
+    timer=setTimeout(function(){
+      if(!running) return;
+      orb.style.transitionDuration=cfg.o+'s'; orb.classList.remove('in'); orb.textContent='Out';
+      timer=setTimeout(cycle,cfg.o*1000);
+    },cfg.i*1000);
+  }
+  orb.addEventListener('click',function(){ if(running){stop()} else {running=true;cycle()} });
+
+  // Waitlist
+  document.getElementById('join').addEventListener('click',function(){
+    document.getElementById('joined').textContent='You’re on the hillside. Take a breath.';
+    this.classList.remove('hop');void this.offsetWidth;this.classList.add('hop');
+  });
+
+  // Mushroom cursor: only for mouse-like pointers; touch and keyboard users are unaffected
+  var cur=document.getElementById('mush');
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.documentElement.classList.add('mush');
+    var tx=0,ty=0,x=0,y=0,tilt=0,seen=false;
+    window.addEventListener('mousemove',function(e){
+      tx=e.clientX;ty=e.clientY;
+      if(!seen){seen=true;x=tx;y=ty;cur.style.opacity=1}
+      cur.classList.toggle('hot',!!(e.target.closest&&e.target.closest('a,button,h1 span')));
+    });
+    document.addEventListener('mouseleave',function(){cur.style.opacity=0});
+    document.addEventListener('mouseenter',function(){if(seen)cur.style.opacity=1});
+    window.addEventListener('mousedown',function(){cur.classList.add('down')});
+    window.addEventListener('mouseup',function(){cur.classList.remove('down')});
+    (function loop(){
+      var dx=tx-x;
+      x+=dx*.35;y+=(ty-y)*.35;
+      tilt+=((Math.max(-25,Math.min(25,dx*1.2)))-tilt)*.2;
+      cur.style.transform='translate('+(x-18)+'px,'+(y-6)+'px) rotate('+tilt+'deg)';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  // Scroll reveal
+  var els=document.querySelectorAll('.rise');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15});
+    els.forEach(function(e){io.observe(e)});
+  } else els.forEach(function(e){e.classList.add('on')});
+})();
+</script>
+</body>
+</html>
