@@ -1,7 +1,7 @@
 import RecipeFinder from '@/components/containers/RecipeFinder';
 import Hills from '@/components/ui/Hills';
 import OvalFrame from '@/components/ui/OvalFrame';
-import CuisineStrip from '@/components/ui/CuisineStrip';
+
 import HowItWorks from '@/components/ui/HowItWorks';
 import RecipeCard from '@/components/ui/RecipeCard';
 import { recipes } from '@/data/mockRecipes';
@@ -16,7 +16,7 @@ export default function Home() {
       </div>
 
       <div id="finder"><RecipeFinder /></div>
-      <CuisineStrip />
+      
 
       <section aria-labelledby="popular-h" className="mx-auto max-w-5xl px-5 py-16">
         <h2 id="popular-h" className="text-3xl font-bold text-bark sm:text-4xl">Popular right now</h2>

@@ -32,4 +32,27 @@ export const recipes = [
       { name: 'gochugaru' }, { name: 'sesame oil', optional: true },
     ],
   },
+  {
+    id: 4,
+    title: 'Thai basil chicken',
+    cuisine: 'Thai',
+    cookMinutes: 25,
+    macros: { calories: 430, protein: 36, carbs: 40, fat: 13, fibre: 3 },
+    ingredients: [
+      { name: 'chicken' }, { name: 'rice' }, { name: 'thai basil' },
+      { name: 'garlic' }, { name: 'fish sauce'},{ name: 'chili', optional: true },
+    ],
+    
+  },
+  {
+    id: 5,
+    title: 'Chicken and cabbage salad bowl',
+    cuisine: 'Western',
+    cookMinutes: 15,
+    macros: { calories: 380, protein: 35, carbs: 20, fat: 18, fibre: 6 },
+    ingredients: [
+      { name: 'chicken' }, { name: 'cabbage' }, { name: 'lemon' },
+      { name: 'olive oil', optional: true },
+    ],
+  },
 ];
