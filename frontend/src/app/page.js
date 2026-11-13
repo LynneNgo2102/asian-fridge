@@ -1,7 +1,6 @@
 import RecipeFinder from '@/components/containers/RecipeFinder';
 import Hills from '@/components/ui/Hills';
 import OvalFrame from '@/components/ui/OvalFrame';
-
 import HowItWorks from '@/components/ui/HowItWorks';
 import RecipeCard from '@/components/ui/RecipeCard';
 import { recipes } from '@/data/mockRecipes';

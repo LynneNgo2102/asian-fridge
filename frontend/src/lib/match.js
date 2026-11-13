@@ -1,4 +1,4 @@
-const aliases = {
+export const aliases = {
   'chicken breast': 'chicken',
   'chicken thigh': 'chicken',
   eggs: 'egg',

@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import IngredientInput from '@/components/ui/IngredientInput';
 import IngredientTag from '@/components/ui/IngredientTag';
 import RecipeCard from '@/components/ui/RecipeCard';
 import CuisineStrip from '@/components/ui/CuisineStrip';
 import { recipes } from '@/data/mockRecipes';
 import { cuisines } from '@/data/cuisines';
 import {normalize, rankRecipes } from '@/lib/match';
+import { suggest } from '@/lib/suggest';
 
 export default function RecipeFinder() {
   const [input, setInput] = useState('');
@@ -33,16 +35,12 @@ export default function RecipeFinder() {
 
   return (
     <section className="mx-auto max-w-3xl px-5 py-10">
-      <form onSubmit={addIngredient} className="flex gap-2">
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="chicken, rice, tofu…"
-          aria-label="Add an ingredient"
-          className="flex-1 rounded-full border-4 border-bark bg-cream px-4 py-2"
-        />
-        <button className="rounded-full bg-berry px-5 font-bold text-white">Add</button>
-      </form>
+      <IngredientInput
+        value={input}
+        onChange={setInput}
+        suggestions={suggest(input, have)}
+        onAdd={addIngredient}
+      />
 
       <div className="mt-4 flex flex-wrap gap-2">
         {have.map((name) => (
