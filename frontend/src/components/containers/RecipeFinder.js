@@ -15,9 +15,8 @@ export default function RecipeFinder() {
   const [have, setHave] = useState([]);
   const [cuisine, setCuisine] = useState(null);
 
-  const addIngredient = (e) => {
-    e.preventDefault();
-    const name = normalize(input);
+  const addIngredient = (text) => {
+    const name = normalize(text);
     if (name && !have.includes(name)) setHave([...have, name]);
     setInput('');
   };
