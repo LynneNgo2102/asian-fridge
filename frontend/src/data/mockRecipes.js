@@ -9,6 +9,13 @@ export const recipes = [
       { name: 'chicken' }, { name: 'rice' }, { name: 'lemongrass' },
       { name: 'fish sauce' }, { name: 'garlic' }, { name: 'sesame oil', optional: true },
     ],
+    steps: [
+      'Cook the rice according to the packet.',
+      'Mince the lemongrass and garlic, then marinate the sliced chicken with them and the fish sauce for 15 minutes.',
+      'Pan-fry the chicken over medium-high heat until golden and cooked through, about 8 to 10 minutes.',
+      'Serve over the rice and drizzle with sesame oil if you have it.',
+    ],
+    note: 'Bruise the lemongrass with the back of a knife before mincing so it gives more flavor.',
   },
   {
     id: 2,
@@ -20,6 +27,13 @@ export const recipes = [
       { name: 'salmon' }, { name: 'rice' }, { name: 'soy sauce' },
       { name: 'cucumber' }, { name: 'sesame oil', optional: true },
     ],
+    steps: [
+      'Cook the rice according to the packet.',
+      'Pan-sear the salmon for 3 to 4 minutes per side.',
+      'Slice the cucumber.',
+      'Flake the salmon over the rice, add the cucumber and splash with soy sauce.',
+    ],
+    note: 'Pat the salmon dry before searing for a crisper skin.',
   },
   {
     id: 3,
@@ -31,6 +45,13 @@ export const recipes = [
       { name: 'tofu' }, { name: 'egg' }, { name: 'garlic' },
       { name: 'gochugaru' }, { name: 'sesame oil', optional: true },
     ],
+    steps: [
+      'Sauté the minced garlic and gochugaru in a little oil for 1 minute.',
+      'Add 2 cups of water and bring to a simmer.',
+      'Add the tofu in large chunks and simmer for 5 minutes.',
+      'Crack in the eggs, cover and cook for 2 minutes.',
+    ],
+    note: 'Add the tofu in big chunks, since soft tofu breaks apart easily when stirred.',
   },
   {
     id: 4,
@@ -42,7 +63,13 @@ export const recipes = [
       { name: 'chicken' }, { name: 'rice' }, { name: 'thai basil' },
       { name: 'garlic' }, { name: 'fish sauce'},{ name: 'chili', optional: true },
     ],
-    
+    steps: [
+      'Cook the rice according to the packet.',
+      'Stir-fry the garlic (and chilies, if using) for 30 seconds.',
+      'Add the minced chicken and cook until done, then stir in the fish sauce.',
+      'Turn off the heat, stir in the basil and serve over the rice.',
+    ],
+    note: 'Add the basil off the heat so it stays bright and fragrant.',
   },
   {
     id: 5,
@@ -54,5 +81,11 @@ export const recipes = [
       { name: 'chicken' }, { name: 'cabbage' }, { name: 'lemon' },
       { name: 'olive oil', optional: true },
     ],
+     steps: [
+      'Pan-fry or poach the chicken until cooked through, then slice it.',
+      'Toss the shredded cabbage with lemon juice (and olive oil if using).',
+      'Top the cabbage with the chicken.',
+    ],
+    note: 'Salt the cabbage lightly and let it sit for 5 minutes for a softer crunch.',
   },
 ];
