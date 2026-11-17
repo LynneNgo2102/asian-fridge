@@ -4,6 +4,7 @@ import NutritionPanel from '@/components/ui/NutritionPanel';
 import RecipeNote from '@/components/ui/RecipeNote';
 import Hills from '@/components/ui/Hills';
 import { getRecipeById } from '@/lib/recipes';
+import RecipeGallery from '@/components/ui/RecipeGallery';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -25,7 +26,7 @@ export default async function RecipePage({ params }) {
           {recipe.cuisine} · {recipe.cookMinutes} min · serves {recipe.servings}
         </p>
         <h1 className="text-4xl font-bold text-bark sm:text-5xl">{recipe.title}</h1>
-
+            <RecipeGallery images={recipe.images} title={recipe.title} />
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <section aria-labelledby="ingredients-h" className="rounded-3xl border-4 border-bark bg-cream p-6">
             <h2 id="ingredients-h" className="text-2xl font-bold text-bark">Ingredients</h2>

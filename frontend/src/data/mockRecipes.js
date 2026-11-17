@@ -15,7 +15,12 @@ export const recipes = [
       'Pan-fry the chicken over medium-high heat until golden and cooked through, about 8 to 10 minutes.',
       'Serve over the rice and drizzle with sesame oil if you have it.',
     ],
+    images: [
+       { src: '/images/recipes/vietnamese-lemongrass-chicken-rice-bowl.jpg', alt: 'Bowl of rice topped with golden lemongrass chicken and sliced cucumber' },
+      { src: '/images/recipes/Asian-Salmon-Rice-Bowl.jpg', alt: 'Bowl of rice topped with golden lemongrass chicken and sliced cucumber' },
+    ],
     note: 'Bruise the lemongrass with the back of a knife before mincing so it gives more flavor.',
+    
   },
   {
     id: 2,
@@ -32,6 +37,10 @@ export const recipes = [
       'Pan-sear the salmon for 3 to 4 minutes per side.',
       'Slice the cucumber.',
       'Flake the salmon over the rice, add the cucumber and splash with soy sauce.',
+    ],
+    images: [
+       { src: '/images/recipes/Asian-Salmon-Rice-Bowl.jpg', alt: 'Bowl of rice topped with golden lemongrass chicken and sliced cucumber' },
+
     ],
     note: 'Pat the salmon dry before searing for a crisper skin.',
   },
@@ -51,6 +60,10 @@ export const recipes = [
       'Add the tofu in large chunks and simmer for 5 minutes.',
       'Crack in the eggs, cover and cook for 2 minutes.',
     ],
+    images: [
+       { src: '/images/recipes/soft-tofu-stew.jpg', alt: 'Bowl of rice topped with golden lemongrass chicken and sliced cucumber' },
+
+    ],
     note: 'Add the tofu in big chunks, since soft tofu breaks apart easily when stirred.',
   },
   {
@@ -69,6 +82,10 @@ export const recipes = [
       'Add the minced chicken and cook until done, then stir in the fish sauce.',
       'Turn off the heat, stir in the basil and serve over the rice.',
     ],
+     images: [
+       { src: '/images/recipes/thai-basil-chicken.jpg', alt: 'Bowl of rice topped with golden lemongrass chicken and sliced cucumber' },
+
+    ],
     note: 'Add the basil off the heat so it stays bright and fragrant.',
   },
   {
@@ -85,6 +102,10 @@ export const recipes = [
       'Pan-fry or poach the chicken until cooked through, then slice it.',
       'Toss the shredded cabbage with lemon juice (and olive oil if using).',
       'Top the cabbage with the chicken.',
+    ],
+    images: [
+       { src: '/images/recipes/chicken-cabbage-bowl.jpg', alt: 'Bowl of rice topped with golden lemongrass chicken and sliced cucumber' },
+
     ],
     note: 'Salt the cabbage lightly and let it sit for 5 minutes for a softer crunch.',
   },
