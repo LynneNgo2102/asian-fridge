@@ -6,6 +6,9 @@ export const aliases = {
   'white rice': 'rice',
 };
 
+// "willing to buy a few" = up to this many missing required ingredients
+export const MAX_MISSING = 3;
+
 export const normalize = (text) => {
   const t = text.trim().toLowerCase();
   return aliases[t] || t;
@@ -24,9 +27,11 @@ export function scoreRecipe(recipe, have) {
   };
 }
 
-export function rankRecipes(recipes, have) {
+// mode: 'have-only' | 'buy-few'
+export function rankRecipes(recipes, have, mode = 'buy-few') {
   return recipes
     .map((r) => scoreRecipe(r, have))
     .filter((r) => r.haveCount > 0)
-    .sort((a, b) => b.score - a.score);
+    .filter((r) => (mode === 'have-only' ? r.missing.length === 0 : r.missing.length <= MAX_MISSING))
+    .sort((a, b) => b.score - a.score || a.cookMinutes - b.cookMinutes);
 }

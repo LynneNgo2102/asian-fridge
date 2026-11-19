@@ -5,8 +5,10 @@ import IngredientInput from '@/components/ui/IngredientInput';
 import IngredientTag from '@/components/ui/IngredientTag';
 import RecipeCard from '@/components/ui/RecipeCard';
 import CuisineStrip from '@/components/ui/CuisineStrip';
+import MatchModeToggle from '../ui/MatchModeToggle';
 import { recipes } from '@/data/mockRecipes';
 import { cuisines } from '@/data/cuisines';
+import { matchModes } from '@/data/matchModes';
 import {normalize, rankRecipes } from '@/lib/match';
 import { suggest } from '@/lib/suggest';
 
@@ -14,6 +16,7 @@ export default function RecipeFinder() {
   const [input, setInput] = useState('');
   const [have, setHave] = useState([]);
   const [cuisine, setCuisine] = useState(null);
+  const [mode, setMode] = useState('buy-few');
 
   const addIngredient = (text) => {
     const name = normalize(text);
@@ -22,14 +25,18 @@ export default function RecipeFinder() {
   };
 
   const pool = cuisine ? recipes.filter((r) => r.cuisine === cuisine) : recipes;
-  // ingredients entered -> ranked by match; only a cuisine picked -> browse that cuisine
-  const results = have.length > 0 ? rankRecipes(pool, have) : cuisine ? pool : [];
+  const hasIngredients = have.length > 0;
+  // ingredients entered -> ranked by match; only a cuisine picked -> browse; neither -> nothing yet
+  const results = hasIngredients ? rankRecipes(pool, have, mode) : cuisine ? pool : [];
+  // FUTURE: status message -> const status = buildStatus({ count: results.length, cuisine, hasIngredients });
 
-  let status = '';
-  if (have.length > 0 || cuisine) {
-    status = results.length
-      ? `${results.length} ${cuisine || ''} recipe${results.length === 1 ? '' : 's'} found`.replace('  ', ' ')
-      : `No ${cuisine || ''} recipes match yet. Try adding another ingredient.`.replace('  ', ' ');
+  // small empty-state hint, so a strict search never ends in silence
+  let emptyMessage = '';
+  if (hasIngredients && results.length === 0) {
+    emptyMessage =
+      mode === 'have-only'
+        ? 'Nothing you can make with only these yet. Add more ingredients, or switch to “I’m willing to buy a few things”.'
+        : 'No recipes match yet. Try adding another ingredient.';
   }
 
   return (
@@ -47,11 +54,15 @@ export default function RecipeFinder() {
         ))}
       </div>
 
+      {hasIngredients && <MatchModeToggle modes={matchModes} selected={mode} onSelect={setMode} />}
+
       <CuisineStrip cuisines={cuisines} selected={cuisine} onSelect={setCuisine} />
 
-      <p aria-live="polite" className="mt-6 text-center font-medium">{status}</p>
+      {/* FUTURE: status message goes here ->
+          <p aria-live="polite" className="mt-6 text-center font-medium">{status}</p> */}
+      <p aria-live="polite" className="mt-6 text-center font-medium">{emptyMessage}</p>
 
-      <div className="mt-4 grid gap-5 sm:grid-cols-2">
+      <div className="mt-6 grid gap-5 sm:grid-cols-2">
         {results.map((r) => <RecipeCard key={r.id} recipe={r} />)}
       </div>
     </section>
