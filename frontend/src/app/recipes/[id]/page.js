@@ -5,7 +5,7 @@ import RecipeNote from '@/components/ui/RecipeNote';
 import Hills from '@/components/ui/Hills';
 import { getRecipeById } from '@/lib/recipes';
 import RecipeGallery from '@/components/ui/RecipeGallery';
-
+import { getSwaps } from '@/lib/substitutes';
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const recipe = getRecipeById(id);
@@ -31,12 +31,20 @@ export default async function RecipePage({ params }) {
           <section aria-labelledby="ingredients-h" className="rounded-3xl border-4 border-bark bg-cream p-6">
             <h2 id="ingredients-h" className="text-2xl font-bold text-bark">Ingredients</h2>
             <ul className="mt-3 grid gap-2">
-              {recipe.ingredients.map((i) => (
-                <li key={i.name}>
-                  <span className="font-medium">{i.amount}</span> {i.name}
-                  {i.optional && <span className="text-sm"> (optional)</span>}
-                </li>
-              ))}
+                {recipe.ingredients.map((i) => {
+                    const swaps = getSwaps(i.name);
+                    return (
+                    <li key={i.name}>
+                        <span className="font-medium">{i.amount}</span> {i.name}
+                        {i.optional && <span className="text-sm"> (optional)</span>}
+                        {swaps.length > 0 && (
+                        <span className="block text-sm">
+                            Swap: {swaps.map((s) => `${s.name} (${s.note})`).join(' or ')}
+                        </span>
+                        )}
+                    </li>
+                    );
+                })}
             </ul>
           </section>
 

@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import SubstituteList from './SubstituteList';
 
 export default function RecipeCard({ recipe }) {
-  const { id, title, cuisine, cookMinutes, macros, score, haveCount, totalCount, missing = [] } = recipe;
+  const { id, title, cuisine, cookMinutes, macros, score, haveCount, totalCount, missing = [], swaps = [] } = recipe;
   const hasMatch = score !== undefined;
 
   return (
@@ -25,6 +26,7 @@ export default function RecipeCard({ recipe }) {
       </p>
 
       {missing.length > 0 && <p className="mt-2 text-sm">Missing: {missing.join(', ')}</p>}
+      <SubstituteList swaps={swaps} />
     </article>
   );
 }

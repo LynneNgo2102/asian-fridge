@@ -1,3 +1,4 @@
+import { getSwaps } from "./substitutes";
 export const aliases = {
   'chicken breast': 'chicken',
   'chicken thigh': 'chicken',
@@ -18,12 +19,16 @@ export function scoreRecipe(recipe, have) {
   const required = recipe.ingredients.filter((i) => !i.optional);
   const owned = required.filter((i) => have.includes(i.name));
   const missing = required.filter((i) => !have.includes(i.name)).map((i) => i.name);
+  const swaps = missing
+      .map((name) => ({ingredient: name, options: getSwaps(name, have) }))
+      .filter((s) => s.options.length > 0);
   return {
     ...recipe,
     score: Math.round((owned.length / required.length) * 100),
     haveCount: owned.length,
     totalCount: required.length,
     missing,
+    swaps,
   };
 }
 
