@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SavedLink from './SavedLink';
 
 export default function Header() {
     return (
@@ -9,6 +10,7 @@ export default function Header() {
             <nav aria-label="Main" className="flex gap-5 font-medium">
         <Link href="/#finder" className="hover:underline">Find recipes</Link>
         <Link href="/#how" className="hover:underline">How it works</Link>
+        <SavedLink/>
       </nav>
     </header>
     );
