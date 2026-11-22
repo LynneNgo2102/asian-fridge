@@ -8,7 +8,7 @@ export const aliases = {
 };
 
 // "willing to buy a few" = up to this many missing required ingredients
-export const MAX_MISSING = 3;
+export const MAX_MISSING = 4;
 
 export const normalize = (text) => {
   const t = text.trim().toLowerCase();
