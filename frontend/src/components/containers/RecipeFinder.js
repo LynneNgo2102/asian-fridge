@@ -80,7 +80,7 @@ export default function RecipeFinder() {
       <p aria-live="polite" className="mt-6 text-center font-medium">{emptyMessage}</p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        {results.map((r) => <RecipeCard key={r.id} recipe={r} />)}
+        {results.map((r) => <RecipeCard key={r.id} recipe={r} have={have} />)}
       </div>
     </section>
   );

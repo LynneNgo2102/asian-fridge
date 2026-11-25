@@ -2,11 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import HeartButton from '@/components/ui/HeartButton';
 import SubstituteList from '@/components/ui/SubstituteList';
+import { recipeHref } from '@/lib/have';
 
-export default function RecipeCard({ recipe }) {
-  const { id, title, cuisine, cookMinutes, macros, images= [], score, haveCount, totalCount, missing = [], swaps = [] } = recipe;
+export default function RecipeCard({ recipe, have = [] }) {
+  const { id, title, cuisine, cookMinutes, macros, images = [], score, haveCount, totalCount, missing = [], swaps = [] } = recipe;
   const hasMatch = score !== undefined;
   const photo = images[0];
+
   return (
     <article className="relative overflow-hidden rounded-3xl border-4 border-bark bg-cream p-5 transition hover:-translate-y-1 hover:-rotate-1 focus-within:ring-4 focus-within:ring-sky">
       <HeartButton id={id} title={title} className="absolute right-3 top-3 z-10" />
@@ -28,7 +30,7 @@ export default function RecipeCard({ recipe }) {
       <p className="text-sm font-medium text-sky">{cuisine} · {cookMinutes} min</p>
 
       <h3 className="text-xl font-bold text-bark">
-        <Link href={`/recipes/${id}`} className="outline-none after:absolute after:inset-0">
+        <Link href={recipeHref(id, have)} className="outline-none after:absolute after:inset-0">
           {title}
         </Link>
       </h3>

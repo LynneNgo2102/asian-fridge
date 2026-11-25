@@ -3,10 +3,12 @@ import { notFound } from 'next/navigation';
 import NutritionPanel from '@/components/ui/NutritionPanel';
 import RecipeNote from '@/components/ui/RecipeNote';
 import RecipeGallery from '@/components/ui/RecipeGallery';
+import IngredientChecklist from '@/components/ui/IngredientCheckList'
 import HeartButton from '@/components/ui/HeartButton';
 import Hills from '@/components/ui/Hills';
 import { getRecipeById } from '@/lib/recipes';
-import { getSwaps } from '@/lib/substitutes';
+import { parseHave } from '@/lib/have';
+import { scoreRecipe } from '@/lib/match';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -14,10 +16,14 @@ export async function generateMetadata({ params }) {
   return { title: recipe ? `${recipe.title} | Fridge Feast` : 'Recipe not found' };
 }
 
-export default async function RecipePage({ params }) {
+export default async function RecipePage({ params, searchParams }) {
   const { id } = await params;
+  const { have: haveParam } = await searchParams;
   const recipe = getRecipeById(id);
   if (!recipe) notFound();
+
+  const have = parseHave(haveParam);
+  const scored = have.length > 0 ? scoreRecipe(recipe, have) : null;
 
   return (
     <>
@@ -32,27 +38,19 @@ export default async function RecipePage({ params }) {
           <HeartButton id={recipe.id} title={recipe.title} withLabel />
         </div>
 
+        {scored && (
+          <p className="mt-3 text-lg font-bold text-bark-dark">
+            You have {scored.haveCount} of {scored.totalCount} ingredients ({scored.score}%).
+            {scored.missing.length === 0 && ' You can make this right now.'}
+          </p>
+        )}
+
         <RecipeGallery images={recipe.images} title={recipe.title} />
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <section aria-labelledby="ingredients-h" className="rounded-3xl border-4 border-bark bg-cream p-6">
             <h2 id="ingredients-h" className="text-2xl font-bold text-bark">Ingredients</h2>
-            <ul className="mt-3 grid gap-2">
-              {recipe.ingredients.map((i) => {
-                const swaps = getSwaps(i.name);
-                return (
-                  <li key={i.name}>
-                    <span className="font-medium">{i.amount}</span> {i.name}
-                    {i.optional && <span className="text-sm"> (optional)</span>}
-                    {swaps.length > 0 && (
-                      <span className="block text-sm">
-                        Swap: {swaps.map((s) => `${s.name} (${s.note})`).join(' or ')}
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+            <IngredientChecklist ingredients={recipe.ingredients} have={have} />
           </section>
 
           <NutritionPanel macros={recipe.macros} servings={recipe.servings} />
