@@ -23,15 +23,16 @@ export default function SavedRecipes() {
         );
      }
 
-     return (
-        <>
-            <p aria-live="polite" className="mt-2 font-medium">
-                {items.length} saved recipe{items.length === 1 ? '' : 's'}
-            </p>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-                {items.map((r) => <RecipeCard key={r.id} recipe={r} />)}
-            </div>
+        return (
+            <>
+                <p aria-live="polite" className="mt-2 font-medium">
+                    {items.length} saved recipe{items.length === 1 ? '' : 's'}
+                </p>
+                <h2 className="sr-only">Your saved recipes</h2>
+                <div className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+                    {items.map((r) => <RecipeCard key={r.id} recipe={r} />)}
+                </div>
             </>
-     );
+        );
     
 }

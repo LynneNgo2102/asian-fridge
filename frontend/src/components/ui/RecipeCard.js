@@ -36,7 +36,7 @@ export default function RecipeCard({ recipe, have = [] }) {
       </h3>
 
       {hasMatch && (
-        <p className="mt-1 font-medium text-leaf">
+        <p className="mt-1 font-medium text-leaf-dark">
           You have {haveCount} of {totalCount} ingredients ({score}%)
         </p>
       )}

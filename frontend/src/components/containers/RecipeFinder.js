@@ -57,6 +57,7 @@ export default function RecipeFinder() {
 
   return (
     <section className="mx-auto max-w-3xl px-5 py-10">
+       <h2 className="sr-only">Find recipes by ingredient</h2>
       <IngredientInput
         value={input}
         onChange={setInput}

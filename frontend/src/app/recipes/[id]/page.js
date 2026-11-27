@@ -10,6 +10,7 @@ import { getRecipeById } from '@/lib/recipes';
 import { parseHave } from '@/lib/have';
 import { scoreRecipe } from '@/lib/match';
 
+export const instant = false;
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const recipe = getRecipeById(id);
