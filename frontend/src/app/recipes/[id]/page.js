@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import NutritionPanel from '@/components/ui/NutritionPanel';
 import RecipeNote from '@/components/ui/RecipeNote';
 import RecipeGallery from '@/components/ui/RecipeGallery';
-import IngredientChecklist from '@/components/ui/IngredientCheckList'
+import IngredientChecklist from '@/components/ui/IngredientChecklist';
 import HeartButton from '@/components/ui/HeartButton';
 import Hills from '@/components/ui/Hills';
 import { getRecipeById } from '@/lib/recipes';
